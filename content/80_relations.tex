@@ -1,0 +1,163 @@
+\section{Relations}
+
+\subsection{Factory Method}
+
+\begin{itemize}
+    \item \textcolor{blue}{Abstract Factory} basieren oftmals auf einem Set von \textcolor{blue}{Factory Methods}
+    \item \textcolor{blue}{Prototype} kann verwendet werden um die Methoden dieser Klassen zusammenzustellen
+    \item Die \textcolor{blue}{Factory Methods} können zusammen mit \textcolor{blue}{Iterator} verwendet werden, damit die Unterklassen von Sammlungen verschiedene Arten von Iteratoren zurückgeben, die mit den Sammlungen kompatibel sind
+    \item Eine \textcolor{blue}{Factory Method} kann als Schritt in einer grossen \textcolor{blue}{Template Method} dienen
+\end{itemize}
+
+\subsection{Abstract Factory}
+
+\begin{itemize}
+    \item \textcolor{blue}{Abstract Factory} gibt das Produkt umgehend zurück, hingegen \textcolor{blue}{Builder} kann noch zusätzliche Konstruktions-Schritte machen, bevor das Produkt abgerufen wird
+    \item \textcolor{blue}{Prototype} kann verwendet werden um die Methoden der Klassen zusammenzustellen
+    \item \textcolor{blue}{Abstract Factory} kann als alternative zu \textcolor{blue}{Facade} dienen, wenn nur die Erstellung der Ob-
+    jekte im Subsystem versteckt werden sollen
+    \item Eine \textcolor{blue}{Bridge} kann verwendet werden, wenn ei-
+    nige Abstraktionen nur mit bestimmten Implementierungen funktionieren können. In diesem Fall kann \textcolor{blue}{Abstract Factory} diese Beziehung
+    kapseln und die Komplexität vor dem Client-Code verbergen
+    \item Abstract Factories können als \textcolor{blue}{Singleton} implementiert werden
+\end{itemize}
+
+\subsection{Prototype}
+
+\begin{itemize}
+    \item \textcolor{blue}{Prototype} kann helfen, wenn Kopien von \textcolor{blue}{Commands} in einer History gespeichert werden müssen
+    \item \textcolor{blue}{Composite} und \textcolor{blue}{Decorator} können oft von \textcolor{blue}{Prototype} profitieren. Dies erlaubt komplexe Strukturen zu klonen anstelle diese rekonstruieren zu müssen
+    \item \textcolor{blue}{Prototype} kann eine einfachere Alternative zu \textcolor{blue}{Memento} sein
+    \item \textcolor{blue}{Prototype} kann als \textcolor{blue}{Singleton} implementiert werden
+\end{itemize}
+
+\subsection{Adapter}
+
+\begin{itemize}
+    \item \textcolor{blue}{Adapter} bietet eine andere Schnittstelle zum wrapped-Objekt, \textcolor{blue}{Proxy} bietet es mit der selben Schnittstelle an und \textcolor{blue}{Decorator} bietet es mit erweiterter Schnittstelle an
+    \item \textcolor{blue}{Bridge, State, Strategy} und \textcolor{blue}{Adapter} haben alle sehr ähnliche Strukturen
+\end{itemize}
+
+\subsection{Composite}
+
+\begin{itemize}
+    \item \textcolor{blue}{Builder} kann verwendet werden um komplexe \textcolor{blue}{Composite} Bäume zu erstellen
+    \item \textcolor{blue}{Chain of Responsibility} wird oft in Verbindung von \textcolor{blue}{Composite} verwendet
+    \item \textcolor{blue}{Iterators} können verwendet werden um den \textcolor{blue}{Composite} Tree zu traversieren
+    \item \textcolor{blue}{Visitors} können verwendet werden, um Operation über den gesamten \textcolor{blue}{Composite} Tree auszuführen
+    \item Shared Leaf Nodes des \textcolor{blue}{Composite} Tree können als \textcolor{blue}{Flyweights} implementiert werden um RAM zu speichern
+    \item \textcolor{blue}{Decorator} ist wie ein \textcolor{blue}{Composite} mit einer Child-Komponente. \textcolor{blue}{Decorator} kann verwendet um das Verhalten eines speizifischen Objekts im \textcolor{blue}{Composite} Tree zu erweitern
+    \item Kann von der Verwendung von \textcolor{blue}{Prototype} profitieren
+\end{itemize}
+
+\subsection{Decorator}
+
+\begin{itemize}
+    \item \textcolor{blue}{Decorator} unterstütz rekursive Composition, hingegen beim Adapter ist dies nicht möglich. (Siehe \textcolor{blue}{Adapter})
+    \item \textcolor{blue}{Decorator} kann von der Verwendung von \textcolor{blue}{Prototype} profitieren
+\end{itemize}
+
+\subsection{Facade}
+
+\begin{itemize}
+    \item Facade definiert eine neue Schnittstelle für existierende Objekte, hingegen \textcolor{blue}{Adapter} macht eine existierende Schnittstelle nutzbar.
+    \item Siehe \textcolor{blue}{Abstract Factory}
+    \item Hat Ähnlichkeiten zu \textcolor{blue}{Proxy} und \textcolor{blue}{Mediator}
+\end{itemize}
+
+\subsection{Flyweight}
+
+\begin{itemize}
+    \item Shared Leaf Nodes im \textcolor{blue}{Composite} Tree können als \textcolor{blue}{Flyweight} implementiert werden um RAM zu sparen
+    \item \textcolor{blue}{Flyweight} zeigt wie wie viele kleine Objekte erstellt werden, hingegen \textcolor{blue}{Facade} zeigt wie ein Objekt erstellt wird, das ein Subsystem repräsentiert
+\end{itemize}
+
+\subsection{Proxy}
+
+\begin{itemize}
+    \item Siehe \textcolor{blue}{Adapter}
+    \item Ähnlichkeit zu \textcolor{blue}{Proxy}
+\end{itemize}
+
+\subsection{Command}
+
+\begin{itemize}
+    \item \textcolor{blue}{Chain of Responsibility, Command, Mediator} und \textcolor{blue}{Observer} adressieren verschiedene Wege um Sender und Receiver von Requests zu verbinden
+    \item Handlers in \textcolor{blue}{Chain of Responsibility} können als \textcolor{blue}{Command} implementiert werden
+    \item \textcolor{blue}{Command} und \textcolor{blue}{Memento} können zusammen
+    verwendet werden um ''undo'' zu implementieren
+    \item \textcolor{blue}{Prototype} kann helfen, wenn Kopien von \textcolor{blue}{Commands} in einer History gespeichert werden müssen
+    \item \textcolor{blue}{Visitor} kann eine mächtige Version des \textcolor{blue}{Command} Patterns sein
+\end{itemize}
+
+\subsection{Iterators}
+
+\begin{itemize}
+    \item Traversieren eine \textcolor{blue}{Composite} Trees
+    \item \textcolor{blue}{Factory Method} kann mit \textcolor{blue}{Iterator} verwendet werden um  Collection-Sub-Klassen unterschiedliche Typen von Iterator zurückzugeben, welche mit den Collections kompatibel sind
+    \item \textcolor{blue}{Memento} kann mit \textcolor{blue}{Iterator} verwendet werden um den aktuellen Iterations-Zustand zuspeichern und falls nötig dorthin zu gehen
+    \item \textcolor{blue}{Visitor} kann mit \textcolor{blue}{Iterator} verwendet werden, um komplexe Datenstrukturen zu traversieren
+\end{itemize}
+
+
+\subsection{Mediator}
+
+\begin{itemize}
+    \item Siehe \textcolor{blue}{Command}
+    \item \textcolor{blue}{Facade} und \textcolor{blue}{Mediator} haben ähnliche Jobs
+    \item \textcolor{blue}{Observer} um die bi-direction zu lösen. Mitigiert Liabilities des Mediators $\rightarrow$ \textit{Limits Subclassing(of mediator class)} und \textit{May result in hard maintainable monoliths}
+\end{itemize}
+
+\subsection{Memento}
+
+\begin{itemize}
+    \item \textcolor{blue}{Command} und \textcolor{blue}{Memento} können zusammen verwendet werden um ''undo'' zu implementieren
+    \item \textcolor{blue}{Iterator} und \textcolor{blue}{Memento} können miteinander verwendet werden
+    \item \textcolor{blue}{Prototype} kann manchmal eine einfache Alternative zu \textcolor{blue}{Memento} sein
+\end{itemize}
+
+\subsection{Observer}
+
+\begin{itemize}
+    \item Siehe \textcolor{blue}{Command}
+    \item Sehr ähnlich wie \textcolor{blue}{Mediator}
+\end{itemize}
+
+\subsection{State}
+
+\begin{itemize}
+    \item siehe \textcolor{blue}{Adapter}
+    \item \textcolor{blue}{State} kann als eine extension von \textcolor{blue}{Strategy} gesehen werden
+\end{itemize}
+
+\subsection{Strategy}
+
+\begin{itemize}
+    \item Siehe Adapter
+    \item \textcolor{blue}{Decorator} kann das äussere eines Objekts ändern und \textcolor{blue}{Strategy} das innere
+    \item \textcolor{blue}{Template Method} basiert auf Vererbung. \textcolor{blue}{Strategy} basiert auf Composition
+    \item \textcolor{blue}{State} kann als eine extension von \textcolor{blue}{Strategy} gesehen werden
+\end{itemize}
+
+\subsection{Template Method}
+
+\begin{itemize}
+    \item \textcolor{blue}{Factory Method} ist eine Spezialisierung von \textcolor{blue}{Template Method}
+    \item Siehe \textcolor{blue}{Strategy}
+\end{itemize}
+
+
+\subsection{Visitor}
+
+\begin{itemize}
+    \item \textcolor{blue}{Visitor} kann als mächtige Version von \textcolor{blue}{Command} gesehen werden
+    \item \textcolor{blue}{Visitor} kann verwendet werden um Operation über einen \textcolor{blue}{Composite} Tree auszuführen
+    \item \textcolor{blue}{Visitor} kann mit \textcolor{blue}{Iterator} kombiniert werden
+\end{itemize}
+
+\subsection{Command Processor}
+
+\begin{itemize}
+    \item Controller erstellt \textcolor{blue}{Commands} und übergibt diese dem \textcolor{blue}{Command Processor}
+    \item Die Erstellung der \textcolor{blue}{Commands} kann mit \textcolor{blue}{Simple Factory} erstellt werden
+\end{itemize}

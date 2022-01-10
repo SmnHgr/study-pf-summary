@@ -1,69 +1,24 @@
-\section{Meta Pattern}
+\section{Meta Patterns}
+
+\subsection{Reflections (POSA1)}
+
+Lösen übliche Frameworker's Probleme
+
 \begin{itemize}
-    \item Reflection is often used as technology for Meta Programming
-    \item Provide Flexibility, Adaptability \& Generality
-\end{itemize}
-\textbf{Recurring Problems}
-\begin{itemize}
-    \item Reflection solves common frameworkers problems
-    \item Exchanging parts of a software system is hard
-    \item Not yet unknown sofware components should be integrated
+    \item Teile eines Software Systems austauschen ist schwer
+    \item bis jetzt unbekannte Software Komponenten sollen nicht integriert werden
+    \item bietet \textcolor{blue}{Flexibility}, \textcolor{blue}{Adaptability} und \textcolor{blue}{Generality}
+    \item Bieten die Einrichtung für Konzepte wie
+    \begin{itemize}
+        \item Dependency Injection
+        \item Convention over Configuration
+        \item Object-Relation Mapper
+        \item Serialization / Deserialization
+        \item Plugin Architectures
+    \end{itemize}
+    \item Most frameworks use Reflection to locate implementations of extension points and hooks
 \end{itemize}
 
-\subsection{Reflection}
-\textbf{Usage (Java / C\#)}
-\begin{itemize}
-    \item Load of JAR / DLL
-    \item Invoke Methods
-    \item Read out properties/fields
-    \item Create object instances
-    \item Search for annotations on Classes / Methods / Fields / ...
-\end{itemize}
-\textbf{Provides Facility to implement:}
-\begin{itemize}
-    \item DI
-    \item Convention over Configuration
-    \item Object-Relation Mapper
-    \item Serialization / Deserialization
-    \item Plugin Architectures
-\end{itemize}
-Consists of two aspects:\\
-\textbf{Introspection}
-\begin{itemize}
-    \item The ability for a program to observe and therefore reason about its own state
-    \item e.g. Query object properties, get list of methods
-\end{itemize}
-\textbf{Intercession}
-\begin{itemize}
-    \item The ability of a program to modify its own execution state or alter its own interpretation of meaning
-    \item e.g. Modify object properties, add another attribute or exchange code
-\end{itemize}
-Defines meta level and base level:\\
-\textbf{Meta level}
-\begin{itemize}
-    \item Provides self-representation
-    \item Gives the SW a knowledge of its own structure
-    \item Consists of meta objects
-\end{itemize}
-\textbf{Base level}
-\begin{itemize}
-    \item Defines the app logic
-    \item Implementation may use the meta objects
-\end{itemize}
-\includegraphics[width=\linewidth]{meta_base_level.png}
-\subsubsection{Summary}
-\textbf{Benefits}
-\begin{itemize}
-    \item Adapting a software system is easy
-    \item Support for many kinds of changes
-\end{itemize}
-\textbf{Liabilities}
-\begin{itemize}
-    \item Produces non-transparent APIs
-    \item Binding at runtime (limited Type safety)
-\end{itemize}
-
-\subsection{Meta Objects}
 \textbf{Usage}
 \begin{itemize}
     \item Classes
@@ -72,82 +27,157 @@ Defines meta level and base level:\\
     \item Class Relationships
 \end{itemize}
 
-\subsection{Type Object}
+\subsubsection{Aspects}
+
+\textbf{Introspection}
+
+Die Möglichkeit für ein Programm den eigenen Zustand zu überwachen und somit auch ''Reason about'' (z.B. Abfrage, welche Felder eine Klasse hat, \textcolor{blue}{Query object properties}) \\
+
+\textbf{Intercession}
+
+Die Möglichkeit das ein Programm sein eigener Ausführungs-Zustand modifizieren kann. z.B. Können zur Laufzeit die Objekt-Properties oder andere Attribute modizifiert werden \textcolor{blue}{add another attribute} \textcolor{blue}{exchange code}
+
+\subsubsection{Meta vs. Base Level}
+
+\includegraphics[width=\linewidth]{meta_base_level.png} \\
+
+\textbf{Meta level}
+\begin{itemize}
+    \item Bietet eine Selbst-Repräsentation
+    \item Gibt der Software Wissen über ihre eigene Struktur
+    \item Besteht aus Meta-Objekten
+    \item Interface für das Manipulieren von Meta-Objekten wird \textcolor{blue}{MOP} genannt
+\end{itemize}
+\vspace{10pt}
+\textbf{Base level}
+\begin{itemize}
+    \item Definiert die Applikations-Logik
+    \item dessen Implementierung kann Meta-Objekte verwenden
+\end{itemize}
+
+\subsubsection{Consequences}
+\textbf{Benefits}
+\begin{itemize}
+    \item Ein Software System anpassen ist einfach
+    \item Unterstützung für viele Arten von Änderungen
+\end{itemize}
+\vspace{10pt}
+\textbf{Liabilities}
+\begin{itemize}
+    \item Produziert nicht-transparente ''black magic'' APIs
+    \item Binding zur Laufzeit
+    \begin{itemize}
+        \item Limitierte Type Safety
+        \item Weniger Effizient, keine Compiler-Optimierung
+    \end{itemize}
+\end{itemize}
+\vspace{10pt}
+\textbf{Dangers}
+
+\begin{itemize}
+    \item Mehr indirection kostet Effizient
+    \item Zuviel Arbeit zu konfigurieren und instanzieren des Systems
+    \item Resultiert oft in obscure APIs
+    \item Overengineered Solutions
+    \item Security Mechanismen kommen in den Weg oder werden untergraben
+\end{itemize}
+
+\subsection{Type Object (Strategy Pattern)}
+
+Wir wollen übliches Verhalten und Daten an einem Ort haben
+
+\includegraphics[width=\linewidth]{type-object.png}
+
 \subsubsection{Problem}
 \begin{itemize}
     \item We want to keep common behaviour and data in only one place
     \item DRY implementation of domain
     \item How can you categorize objects, eventually dynamically?
 \end{itemize}
+
 \subsubsection{Solution}
-Categorize objects by another object instead of a class. Thus an object can change it's 'class' at runtime
+Kategorisiere Objekte nach einem anderen Objekt anstelle von einer Klasse. Somit kann ein Objekt die Klasse zur Laufzeit ändern
+
 \begin{itemize}
     \item Create a category (type) object which describes multiple objects
     \item Objects forward the calls to the underlying type
 \end{itemize}
 \includegraphics[width=\linewidth]{type_object.png}
-\subsubsection{Summary}
+\subsubsection{Consequences}
 \textbf{Benefits}
 \begin{itemize}
-    \item Categories can be added easily, event at runtime
-    \item Allows multiple meta-levels
+    \item Kategorien können einfach hinzugefügt werden
+    \item Verhindert eine Explosion von Sub-Klassen
+    \item Erlaubt mehrere Meta-Levels
 \end{itemize}
+\vspace{10pt}
 \textbf{Liabilities}
 \begin{itemize}
-    \item Confusing mess of 'classes' because of separation
-    \item Lower efficiency because of indirection
-    \item Changing database schemas can be tricky
-\end{itemize}
-\subsubsection{Discussion}
-\textbf{Based on which GoF Pattern}
-\begin{itemize}
-    \item Strategy
-\end{itemize}
-\textbf{Similar intent in a GoF Pattern}
-\begin{itemize}
-    \item State, also changes at runtime
+    \item Verwirrendes Mess von Klassen und Klassen Mutationen wegen der Separierung
+    \item Weniger Effizienz wegen Indirection
+    \item Änderungen von Datenbank Schemas kann tricky sein
 \end{itemize}
 
+
 \subsection{Property List}
+
+Attribute sollen nach der Compilation anbaubar und abbaubar sein. Objekte teilen Attribute / Parameters über die ganze Klassen Hierarchie.
+
+\includegraphics[width=\linewidth]{property_list.png}
+
 \subsubsection{Problem}
 \begin{itemize}
     \item Attributes should be attachable / detachable after compilation
     \item Objects share attributes / parameters across the class hierarchy
     \item How do you define properties in a flexible way so they can be attached and detached at runtime?
 \end{itemize}
+
 \subsubsection{Solution}
-Provide objects with a property list. That list allows to associate names with other values or objects.
+Liefert Objekte mit einer ''Porperty List''. Diese Liste erlaubt die Verbindung von Namen mit anderen Werten oder Objekten
+
 \begin{itemize}
     \item Property list maps attribute names to values
     \item each name defines a slot
     \item Same slot can be used for attributes with identical semantics
     \item Objects can be triggred to list all slot names and values
 \end{itemize}
-\includegraphics[width=\linewidth]{property_list.png}
-\subsubsection{Summary}
+
+\subsubsection{Consequences}
 \textbf{Benefits}
 \begin{itemize}
-    \item Attributes can be added dynamically
-    \item Object extension while keeping object identity
+    \item Black-box Erweiterbarkeit von Attributen, Attribute können dynamisch hinzugefügt werden
+    \item Objekt-Erweiterung während Identität gleich bleibt
+    \item Gleiche Attribute können für Attribute mit identischer Semantik über die ganze Hierarchie verwendet werden
+    \item Flexible Parameters für generische Methoden Interfaces
     \item Easy attribute iteration
 \end{itemize}
+\vspace{10pt}
 \textbf{Liabilities}
 \begin{itemize}
-    \item Different ways to access regular / dynamic attributes
-    \item Type safety left to the programmer
-    \item Run-time overhead
+    \item Unterschiedliche Wege um auf reguläre und dynamische Attribute zugreifen zu können
+    \item Typ-Sicherheit wird dem Programmierer überlassen
+    \item Naming wird vom Compiler nicht gecheckt (color vs. colour)
+    \item Semantik von Attributen nicht von dem Klassen Code gegeben
+    \item Run-Time overhead kann substanziell sein
     \item Memory Management
 \end{itemize}
-\textbf{Mitigate Liabilities:} Bridge Methods
 
-\subsection{Anything}
+\textcolor{blue}{Bridge Method} kann verwendet werden um type-safety zu mitigieren
+
 \begin{itemize}
-    \item Arbitrary data structure
-    \item Recursively structured Property List
-    \item Internal representation of today's JSON
+    \item Ein typed Schema erlaubt das erzwingen von Property-Namen und Typen
+    \item In C\# werden dafür Extension-Methoden verwendet
 \end{itemize}
-\textbf{Object Definition:}
+
+\vfill\null
+\columnbreak
+
+\subsection{Anything (Super-Klasse für Typen)}
+
+Wir brauchen eine Map um änhliche Daten zur Property List zu halten. Strukturierte Daten beinhaltet auch Sequenzen von Daten. Daten sollen rekursiv strukuriert sein
+
 \includegraphics[width=\linewidth]{anything.png}
+
 \subsubsection{Problem}
 \begin{itemize}
     \item We need to keep a map of data similar to the Property List
@@ -155,32 +185,47 @@ Provide objects with a property list. That list allows to associate names with o
     \item Data should be structured recursively
     \item How do you provide a generic configuration or communication data structure that is easily extensible?
 \end{itemize}
+
 \subsubsection{Solution}
-Create an abstraction for structured values that is self describing.
+Erstelle eine Abstraktion für strukturiere Werte, welche selbst-beschreibend ist
+
 \begin{itemize}
     \item Implement a representation of simple values
     \item Add an implementation for a sequence of values (\& key value access)
     \item Provide a default value
 \end{itemize}
 \includegraphics[width=\linewidth]{anything_uml.png}
-\subsubsection{Summary}
+\subsubsection{Consequences}
 \textbf{Benefits}
 \begin{itemize}
+    \item Lesbares Streaming Format und angemessene Konfigurationsdaten
+    \item Universell Anwendbar, flexibler Austausch über Klassen / Objekt Boundaries
     \item Readable streaming format
     \item Appropriate for configuration data
     \item Universally applicable
     \item Flexible interchange across class/object boundaries
 \end{itemize}
+\vspace{10pt}
 \textbf{Liabilities}
 \begin{itemize}
-    \item Less type safety
-    \item Intent of parameter elements not always obvious
-    \item Overhead for value lookup and member access
-    \item No real object, just data
+    \item Weniger Typ-Sicherheit
+    \item Absicht von Parameter Elementen nicht immer obvious
+    \item Overhead für Value-Lookup und Member Access
+    \item Kein echtes Objekt, nur Daten
 \end{itemize}
-\subsubsection{Discussion}
-\textbf{Which GoF Pattern does Anything implement?}
+
+\subsection{Discussion}
+\textbf{On which GoF pattern is Type Object based?}
+
+Strategy Pattern; every type represents an own strategy for item objects \\
+
+\textbf{Have you already encountered a similar intent of a GoF pattern?}
+
+Yes, it’s similar to the State pattern, which ''seems to change its class'' at runtime. \\
+
+\textbf{Which GoF Pattern does Anything (and variation) implement?}
 \begin{itemize}
     \item Transparent Composite Pattern
     \item Null Object
 \end{itemize}
+
