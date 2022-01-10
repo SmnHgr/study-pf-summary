@@ -1,0 +1,46 @@
+%! Licence = CC BY-NC-SA 4.0
+
+%! Author = mariuszindel
+%! Date = 24. Jan 2021
+%! Project = latex-test-template
+
+
+%import template
+\input{./style/template.tex}
+
+
+\newcommand{\TITLE}{Test Cheat Sheet}
+\newcommand{\DELIVERYDATE}{22.02.2021}
+
+\begin{document}
+    \setlength{\columnseprule}{0.4pt}
+    \footnotesize
+    \begin{multicols*}{4}
+        \setlength{\columnseprule}{0.4pt}
+        %\footnotesize
+        %\tiny
+
+        \input{./content/01_introduction.tex}
+        \newpage
+        \input{./content/02_gof.tex}
+        \newpage
+        \input{./content/03_beyond_gof.tex}
+        \newpage
+        \input{./content/04_value.tex}
+        \newpage
+        \input{./content/06_checks.tex}
+        \newpage
+        \input{./content/07_meta.tex}
+        \newpage
+        %\input{./content/09_react_redux.tex}
+        %\newpage
+        %\input{./content/10_eclipse.tex}
+        %\newpage
+        %\input{./content/11_spring.tex}
+        \input{./content/12_boxing_killing.tex}
+        %\newpage
+        %\input{./content/14_shepard.tex}
+
+
+    \end{multicols*}
+\end{document}
