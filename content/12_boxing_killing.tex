@@ -433,15 +433,15 @@ No, it can be implemented as immutable pool of resouces. There are multiple opti
 \begin{enumerate}
     \item If the items are immutable, the pool is an implementation of the Flyweight pattern
     \item Items can be leased (e.g. Thread Pool), it is an implementation of the Leasing Pattern (POSA 3)
-    \item Mutable resouces in Pools can be implemented as prototype Pattern. The consumers recieves not te resource itself but only a clone of them
+    \item Mutable resouces in Pools can be implemented as prototype Pattern. The consumers recieves not the resource itself but only a clone of them
 \end{enumerate}
 \vspace{10pt}
-\textbf{What is the difference ebtween pooling and caching?}
+\textbf{What is the difference between pooling and caching?}
 
 Pooling wird dann verwendet, wenn die Identität nicht wichtig ist!
 
 \begin{enumerate}
     \item A Pool handles creation, destruction and reuse of the pooled objects
     \item Caching is about managing resources with identity; Pooling does not, all resources in the pool are equal
-    \item Caches manage only object lifetime in the
+    \item Caches manage only object lifetime in the cache, but not the lifecycle of the objects themselves.
 \end{enumerate}
