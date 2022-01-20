@@ -186,6 +186,9 @@ Daten die das Verhalten von tieferen Layers beeinflussen sollen von oben überre
     \item Fragile Bootstrapper: Applikation muss beim Startup verbunden werden
 \end{itemize}
 
+\vfill\null
+\columnbreak
+
 \subsection{Dependency Injection}
 
 Benutzer wollen Implementation von existierenden Applikations-Komponenten überschreiben können. Applikation sollte beim Startup verbunden werden.
@@ -232,6 +235,9 @@ Führe Dependency Injection Container ein, welche die Interfaces und Implementat
     \item Rekursive Dependencies sind schwer zu finden und können das Aufstarten des Systems verhindern
     \item Stützt sich auf Reflection und kann zu Performance Verlust führen
 \end{itemize}
+
+\vfill\null
+\columnbreak
 
 \subsection{Flyweight}
 
@@ -311,7 +317,7 @@ Reduktion der gesamt Anzahl von Instanzen. Abhängig von mehreren Faktoren
 
 Ein schneller und predictable Zugriff auf die Ressourcen soll gewährleistet sein. Keine Verschwendung von CPU und Komplexität soll minimal sein.
 
-\includegraphics[width=\linewidth]{pooling-2.png}
+\includegraphics[width=0.7\linewidth]{pooling-2.png}
 
 Beispiel Thread Pool
 
@@ -352,28 +358,33 @@ Verwalte mehrere Instanzen eines Types einer Ressource in einem Pool. Dieser Poo
     \item Abhängig von der Umgebung und Ressourcen-Typen, müssen die Ressourcen zu im Pool freigegeben werden
     \item Erwerb-Requests müssen synchronisiert sein um Race Condition zu verhindern
 \end{itemize}
-\subsubsection{Discussion}
+
+\vfill\null
+\columnbreak
+
+\subsection{Discussion}
 \textbf{Pattern that can be combined with Pooling}
 \begin{itemize}
     \item Pool acts as mediator
 \end{itemize}
+\vspace{10pt}
 \textbf{Relation of Flyweight and Pooling}
 \begin{itemize}
     \item Flyweight implements a pool with immutable resources statically
 \end{itemize}
+\vspace{10pt}
 \textbf{Is immutability of named resources key?}
 \begin{itemize}
     \item No
 \end{itemize}
+\vspace{10pt}
 \textbf{Difference between pooling and caching}
 \begin{itemize}
     \item Caching is about handling resources with identity, pooling does not
     \item All resources in a pool are equal
     \item Caching only manages object lifetime in cache, not of objects themselve
 \end{itemize}
-
-\subsection{Discussion}
-
+\vspace{10pt}
 \textbf{Patterns in einem Singleton}
 
 \begin{itemize}

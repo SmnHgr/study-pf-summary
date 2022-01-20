@@ -10,20 +10,16 @@
 
 \subsection{Exceptional Behaviour (Meaningful Quantities)}
 
+\subsubsection{Problem}
+
 Fehlende oder inkorrekte Werte in einem Domain Model sind unmöglich zu verhindern. Die Domänen-Logik
 sollte im Stande sein mit dieser Art von fehlenden Daten umzugehen
 
-\subsubsection{Problem}
-\begin{itemize}
-    \item Missing or incorrect values in a domain model are impossible to avoid
-    \item The domain logic should be able to handle this sort of missing data
-    \item How can exceptional behaviour caused by invalid input be handled without throwing errors?
-\end{itemize}
 \subsubsection{Solution}
 Verwende einen oder mehrere unterschiedliche Werte um \textit{exceptional} Umstände zu repräsentieren
 
 \begin{itemize}
-    \item \textcolor{blue}{Invalide Domainaufrufe können \textit{Exceptional Values} produzieren} \textit{Enumeration Value} als \textit{Exceptional Value} können identifizieren, was falsche gelaufen ist
+    \item \textcolor{blue}{Invalide Domainaufrufe können \textit{Exceptional Values} produzieren} \textit{Enumeration Value} als \textit{Exceptional Value} können identifizieren, was falsch gelaufen ist
     \item Domain Logik kann temporär \textit{Exceptional Values} als erlaubter Input akzeptieren
 \end{itemize}
 \begin{lstlisting}
@@ -33,15 +29,12 @@ public div(num: number, div: number): number | CalcError {
 }
 \end{lstlisting}
 
+
 \subsection{Meaningless Behaviour (Meaningful Quantities)}
 
-Wegen dem Error Handling, kann die Domänen-Logik komplexer sein, als geplant. Wie kann \textit{exceptional} Verhalten wegen invalidem Input behandelt werden, ohne Errors zu werfen?
-
 \subsubsection{Problem}
-\begin{itemize}
-    \item Due to error handling, domain logic may be expressed with more complexity than originally conceived
-    \item How can exceptional behaviour due to invalid input be handled without throwing errors?
-\end{itemize}
+
+Wegen dem Error Handling, kann die Domänen-Logik komplexer sein, als geplant. Wie kann \textit{exceptional} Verhalten wegen invalidem Input behandelt werden, ohne Errors zu werfen?
 
 \subsubsection{Solution}
 Schreibe Methoden \textcolor{blue}{mit minimaler Rücksicht} auf mögliche Fehler

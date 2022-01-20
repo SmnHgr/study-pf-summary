@@ -22,12 +22,8 @@
 \end{itemize}
 \vspace{10pt}
 \textbf{Examples}
-\begin{itemize}
-    \item .NET Core
-    \item Entity Framework
-    \item React (lib)
-    \item Vue
-\end{itemize}
+
+.NET Core, Entity Framework, React (lib), Vue
 
 \subsubsection{Differences}
 \textbf{Library}
@@ -45,7 +41,7 @@
 \textbf{Application Framework}
 \begin{itemize}
     \item Contains the \textit{main()} procedure
-    \item Completely controlls the app flow
+    \item Completely controls the app flow
 \end{itemize}
 
 \subsubsection{Consequences}
@@ -66,8 +62,7 @@
 \textbf{Liabilities}
 
 \begin{itemize}
-    \item \textcolor{blue}{Portability} Code ist stark gekoppelt zur überliegenden Fra-
-    mework
+    \item \textcolor{blue}{Portability} Code ist stark gekoppelt zur überliegenden Framework
     \item \textcolor{blue}{Testability} Close coupling between framework parts
     \item \textcolor{blue}{Evolution} User's implementation may break due next
     Framework version
@@ -80,29 +75,18 @@
     \item Main()-Methode lebt im \textcolor{blue}{Application Framework}
     \item Bietet \textcolor{blue}{Hooks} für die Erweiterung und \textcolor{blue}{Callbacks}
     \item Bietet ready-made Klassen für die Nutzung
-    \item Erstellt eine Produkt Familie
+    \item Erstellt eine Produktfamilie
     \item Wiederverwendung von Application Architekturen und Infrastrukturen
     \item Sehr hohe Qualitätsanforderungen an Application Frameworks
 \end{itemize}
 \vspace{10pt}
 \textbf{Examples}
-\begin{itemize}
-    \item Spring
-    \item ASP.NET
-    \item Angular
-\end{itemize}
 
-
-
-
+Spring, ASP.NET, Angular
 
 \subsection{Micro Frameworks}
 
-\begin{itemize}
-    \item Hook Methods
-    \item Extension Point
-    \item Control Flow
-\end{itemize}
+Hook Methods, Extension Point, Control Flow
 
 \subsubsection{Solutions}
 
@@ -117,6 +101,9 @@
 \textbf{Command Processor}
 
 \includegraphics[width=\linewidth]{command_processor_example.png} \\
+
+\vfill\null
+\columnbreak
 
 \textbf{Flyweight}
 
@@ -157,6 +144,10 @@ Beachte die funktionalen und nicht-funktionalen Anforderungen und evaluiere ein 
     \item Evolution
 \end{itemize}
 \vspace{10pt}
+
+\vfill\null
+\columnbreak
+
 \textbf{Potential ways out of the dilemma}
 \begin{enumerate}
     \item \textcolor{blue}{Denke vorab gut nach}
@@ -179,6 +170,6 @@ There are two reasons for lack of framework evolution and improvement
     \item one or more applications use the framework
     \begin{itemize}
         \item changing the framework risks breaking applications
-        \item applications produce work-arounds to framework deficiencies
+        \item applications produce work-arounds to framework deficiencies (Mängel)
     \end{itemize}
 \end{enumerate}

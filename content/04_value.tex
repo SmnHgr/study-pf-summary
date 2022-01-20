@@ -2,6 +2,7 @@
 \subsection{1. System Analysis (OOA)}
 \subsubsection{Individuals}
 \includegraphics[width=\linewidth]{value_overview.png}
+
 Ein Individual ist etwas, das namentlich benannt und sich zuverlässig von anderen
 Individuals unterscheiden kann. \\
 
@@ -35,6 +36,8 @@ Der interpretierte Inhalt ist das dominante Merkmal, ist vergänglich und hat ke
 
 Stellen Systemaktivitäten dar, Haben ein Element der Identität und Zustand
 
+\vfill\null
+
 \subsection{3. Values in Programming (OOP)}
 
 \begin{itemize}
@@ -50,19 +53,19 @@ Stellen Systemaktivitäten dar, Haben ein Element der Identität und Zustand
 \includegraphics[width=\linewidth]{object_aspects.png}
 
 \begin{itemize}
-    \item \textcolor{blue}{Identity} Identität vergängliche Identität bedeutsam
+    \item \textcolor{blue}{Identity} Identität vergänglich oder bedeutsam
     \item \textcolor{blue}{State} Objekt Stateful oder Stateless
     \item \textcolor{blue}{Behavior} Hat das Objekt ein signifikantes Verhalten unabhängig vom State?
 \end{itemize}
 
-\includegraphics[width=\linewidth]{value_pattern_overview.png}
+\includegraphics[width=0.8\linewidth]{value_pattern_overview.png}
 
 \subsection{Whole Value}
 \subsubsection{Problem}
 \begin{itemize}
     \item Plain integers and floating-point numbers are not very useful as domain values
-    \item Errors in dimension and intent communication should be addressed at complile time
-    \item How can you represent primitive quantities from your proble domain without loss of meaning?
+    \item Errors in dimension and intent communication should be addressed at compile time
+    \item How can you represent primitive quantities from your problem domain without loss of meaning?
 \end{itemize}
 
 \subsubsection{Intention}
@@ -87,9 +90,9 @@ Date first = new Date(new Year(year), new Month(month), new Day(day));
 
 \subsection{Value Object / Value Class}
 \subsubsection{Problem}
-\begin{itemize}
-    \item Vergleiche, Indexing und Sortierung sollte nicht auf der Identität, sondern den Inhalt des Value-Objekts adressieren
-\end{itemize}
+
+Vergleiche, Indexing und Sortierung sollte nicht auf der Identität, sondern den Inhalt des Value-Objekts adressieren
+
 
 \subsubsection{Solution}
 Überschreibe Methoden, deren Aktion sicht auf den Inhalt und nicht auf die Identität beziehen sollen und implementiere \textcolor{blue}{Serializable}
@@ -136,6 +139,9 @@ Bereitstellung von Typkonvertierungsmethoden, die für die Umwandlung von Wertob
     $\rightarrow$ \textit{Date.from(Instant i)}
 \end{itemize}
 
+\vfill\null
+\columnbreak
+
 \subsection{Immutable Value}
 
 Verhindere Probleme, wenn Value-Objekte geteilt werden.
@@ -174,6 +180,9 @@ Behandle jede Konstante als ein Whole-Value Instanz, indem sie als \textit{publi
     \item Sind ENUM
 \end{itemize}
 
+\vfill\null
+\columnbreak
+
 \subsection{Copied Value and Cloning}
 Values sollen modifizierbar sein, ohne den Ursprung des internal State zu ändern
 \subsubsection{Problem}
@@ -183,7 +192,7 @@ Values sollen modifizierbar sein, ohne den Ursprung des internal State zu änder
 \end{itemize}
 
 \subsubsection{Solution}
-Implementiere eine cloneable-Interface, das verwendet werden kann, wann immer ein Value-Objekt zurückgegeben werden muss oder als Parameter verwendet wird
+Implementiere ein cloneable-Interface, das verwendet werden kann, wann immer ein Value-Objekt zurückgegeben werden muss oder als Parameter verwendet wird
 
 \begin{itemize}
     \item Cloning bedeutet, erstelle eine Kopie der aktuellen Instanz und allen enthaltenen Feldern
@@ -218,6 +227,9 @@ public final class Date {
 }
 \end{lstlisting}
 
+\vfill\null
+\columnbreak
+
 \subsection{Class Factory Method / Simple Factory (Flyweight)}
 
 Construction von Value-Objekte kann teuer sein. Unterschiedliche Konstruktions-Logik wird benötigt, was in sehr vielen Constructoren enden kann
@@ -239,12 +251,19 @@ Biete eine statische Methode an, die anstelle von üblichen Konstruktoren verwen
 \end{itemize}
 \begin{lstlisting}
 public final class Year {
+
     public static Year of(int value) {
         return new Year(value);
     }
-    private Year(int value) { this.value = value; }
+
+    private Year(int value) {
+        this.value = value;
+    }
 }
 \end{lstlisting}
+
+\vfill\null
+\columnbreak
 
 \subsection{Mutable Companion (Builder)}
 
@@ -269,13 +288,15 @@ Implementiere eine Companion-Klasse, welche modifier-Methoden unterstützt und a
 \begin{lstlisting}
 public final class YearCompanion {
     private int value;
+
     public YearCompanion(Year toModify) {
         this.value = toModify.getValue();
     }
     /* modifying methods */
+    public void next() { value++; }
+
     public Year asValue() { /* Factory Method */
-        return Year.of(value);
-    }
+        return Year.of(value); }
 }
 \end{lstlisting}
 
@@ -298,12 +319,15 @@ Implementiere den Vergleich von \textit{Value Objects}, indem das \textit{Compar
     \item Erstelle eine \textcolor{blue}{Bridge-Methode} für \textit{equals(Object other)} und leite es weiter zu \textit{equals(T other)}
 \end{itemize}
 
+\columnbreak
+
 \subsection{Discussion}
 \textbf{Difference between Whole Value and Immutable Value}
 \begin{itemize}
     \item \textcolor{blue}{Whole Value} Value with a unit should be encapsulated in a class
     \item \textcolor{blue}{Immutable Value} Value within an object must be immutable
 \end{itemize}
+\vspace{10pt}
 \textbf{When would you prefer Class Factory Method over a conversion constructor?}
 \begin{itemize}
     \item \textcolor{blue}{Factory} A foreign value type should be converted into the current value format

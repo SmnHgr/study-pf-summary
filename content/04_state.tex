@@ -32,6 +32,9 @@ Erlaubt einem Objekt das Verhalten zu ändern, wenn dessen internen Zustand sich
     \item Name suggests problem domain rather than the solution
 \end{itemize}
 
+\vfill\null
+\columnbreak
+
 \subsection{Methods for State}
 
 Propagiert eine einzelne Klasse mit vielen Methoden
@@ -61,6 +64,9 @@ Jeder Zustand repräsentiert eine Tabelle oder Record von Methoden referenzen. D
     \item Die State Machine kann viel länger dauern als beabsichtigt oder überschaubar ist
 \end{itemize}
 
+\vfill\null
+\columnbreak
+
 \subsection{Collection for State}
 
 Ermöglicht mehrere State Machines mit der selben Logik zu managen und splittet Logik und Transaction Management in 2 Klassen
@@ -89,3 +95,47 @@ Jeder Zustand wird von einer Collection repräsentiert, die alle State Machines 
     \item Kann zu einem komplexeren State Manager führen
 \end{itemize}
 
+\begin{lstlisting}[basicstyle=\tiny, style=JavaScript]
+export class CollectionClockStateMachine implements ClockStateMachine {
+
+	// contains all states
+	readonly #workpieces = new Array<Workpiece>();
+
+	#displayingTime = new Array<Workpiece>();
+	#settingHours = new Array<Workpiece>();
+	#settingMinutes = new Array<Workpiece>();
+
+	// the following fields/properties are only for demonstration purposes; not part of the pattern
+	readonly #defaultPiece: Workpiece;
+
+	public get hour() { return this.#defaultPiece.hour; }
+	public get minute() { return this.#defaultPiece.minute; }
+	public get second() { return this.#defaultPiece.second; }
+
+	// State machine construction logic goes here...
+	constructor(hour: number, minute: number, second: number) {
+		// #defaultPiece isn't part of the pattern
+		this.#defaultPiece = new Workpiece(hour, minute, second);
+
+		this.#workpieces.push(this.#defaultPiece); // in real world, there are *many* such objects with a state
+		this.#displayingTime.push(...this.#workpieces);
+	}
+
+	public tick(): void {
+		this.#displayingTime.forEach((w) => w.tick());
+	}
+
+	public increment(): void {
+		this.#settingHours.forEach((w) => w.incrementHour());
+		this.#settingMinutes.forEach((w) => w.incrementMinute());
+	}
+
+	public changeMode(): void {
+		// simply rotate the objects within the collections
+		const displayingTimePieces = [ ...this.#displayingTime ];
+		this.#displayingTime =  [ ...this.#settingMinutes ];
+		this.#settingMinutes = [ ...this.#settingHours ];
+		this.#settingHours = displayingTimePieces;
+	}
+}
+\end{lstlisting}
